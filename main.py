@@ -1,3 +1,4 @@
+import argparse
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -5,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 
 
-def play_game(stg):
+def play_game(stg, wait_time):
     # Initialize WebDriver
     driver = webdriver.Chrome()
 
@@ -74,7 +75,7 @@ def play_game(stg):
     # Check and click all button with the feature of is-correct="true"
     try:
         for stage in range(1, 13):
-            time.sleep(0.4)  # To avoid getting 1st place everytime
+            time.sleep(wait_time)  # Use the specified wait time
             card = driver.find_element(By.ID, f"card{stage}")
             if card.get_attribute("is-correct") == "true":
                 card.click()
@@ -122,6 +123,19 @@ def play_game(stg):
 
 
 if __name__ == "__main__":
-    stage_list = [7]  # Enter the stage you want to run
-    for i in stage_list:
-        play_game(i)
+    parser = argparse.ArgumentParser(description="Game automation script")
+    parser.add_argument(
+        "--stages", nargs="+", type=int, required=True, help="List of stages to play"
+    )
+    parser.add_argument(
+        "--wait-time",
+        type=float,
+        default=0.4,
+        help="Wait time between answers (default: 0.4)",
+    )
+
+    args = parser.parse_args()
+
+    for stage in args.stages:
+        print(f"Playing stage {stage}")
+        play_game(stage, args.wait_time)
