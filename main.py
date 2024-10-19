@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 
 
-def play_game(stg, wait_time):
+def play_game(stg, wait_time, name):
     # Initialize WebDriver
     driver = webdriver.Chrome()
 
@@ -101,7 +101,7 @@ def play_game(stg, wait_time):
         name_block = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, '//*[@id="name"]'))
         )
-        name_block.send_keys("YOUR_NAME")  # Change your name here
+        name_block.send_keys(name)  # Change your name here
     except Exception as e:
         print(f"Could not find the name: {e}")
 
@@ -133,9 +133,10 @@ if __name__ == "__main__":
         default=0.4,
         help="Wait time between answers (default: 0.4)",
     )
+    parser.add_argument("--name", type=str, default=None, help="Your name")
 
     args = parser.parse_args()
 
     for stage in args.stages:
         print(f"Playing stage {stage}")
-        play_game(stage, args.wait_time)
+        play_game(stage, args.wait_time, args.name)
