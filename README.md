@@ -12,7 +12,7 @@ git clone https://github.com/Vincent-Lien/Taiwanese_game_script.git
 ### 2. Environment
 Download the chormewebdriver, for the latest version please check: https://googlechromelabs.github.io/chrome-for-testing/#stable  
 
-If you downloaded the chormewebdriver, please place it in the root folder.
+After downloading the chormewebdriver, please place it in the root folder.
 
 Then
 ```
