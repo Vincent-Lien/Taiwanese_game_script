@@ -20,7 +20,7 @@ pip install selenium
 ```
 ### 3. Run
 ```
-python main.py --stages [NUMBER_OF_STAGES] --wait-time [WAITING_TIME_BETWEEN_ANSWERING]
+python main.py --stages [NUMBER_OF_STAGES] --wait-time [WAITING_TIME_BETWEEN_ANSWERING] --name [YOUR_NAME]
 ```
 For example, to run stage 8, stage 9 and wait 0.5 seconds between answers:
 ```
